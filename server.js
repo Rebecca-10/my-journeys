@@ -15,6 +15,7 @@ const passUserToView = require('./middleware/pass-user-to-view.js')
 const port = process.env.PORT ? process.env.PORT : '3000'
 
 const authController = require('./controllers/auth.js')
+const tripsController = require('./controllers/trips.js')
 
 mongoose.connect(process.env.MONGODB_URI)
 
@@ -43,14 +44,20 @@ app.use(passUserToView)
 
 // GET /
 app.get('/', (req, res) => {
-    res.render('index.ejs')
-})
+  // Check if the user is signed in
+  if (req.session.user) {
+    // Redirect signed-in users to their applications index
+    res.redirect(`/users/${req.session.user._id}/trips`);
+  } else {
+    // Show the homepage for users who are not signed in
+    res.render('index.ejs');
+  }
+});
 
 app.use('/auth', authController)
+app.use(isSignedIn);
+app.use('/users/:userId/trips', tripsController);
 
-app.get('/vip-lounge', isSignedIn, (req, res) => {
-    res.send(`Welcome to the party ${req.session.user.username}.`)
-})
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}!`)
