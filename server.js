@@ -13,6 +13,7 @@ const isSignedIn = require('./middleware/is-signed-in.js')
 const passUserToView = require('./middleware/pass-user-to-view.js')
 
 const port = process.env.PORT ? process.env.PORT : '3000'
+const path = require('path');
 
 const authController = require('./controllers/auth.js')
 const tripsController = require('./controllers/trips.js')
@@ -54,6 +55,7 @@ app.get('/', (req, res) => {
   }
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth', authController)
 app.use(isSignedIn);
 app.use('/users/:userId/trips', tripsController);
