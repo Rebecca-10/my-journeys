@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Home Page</title>
-    </head>
-    <body>
-        <%- include('./partials/_navbar.ejs') %>
-        <% if (user) { %>
-        <h1>Welcome to My Travel Journal, <%= user.username %>!</h1>
-        <p>
-            <a href="/auth/sign-out">Sign out</a>
-        </p>
-        <% } else { %>
-        <h1>Welcome to My Travel Journal, guest.</h1>
-        <p>
-            <a href="/auth/sign-up">Sign up</a> or
-            <a href="/auth/sign-in">sign in</a>.
-        </p>
-        <% } %>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <%- include('./partials/_navbar.ejs') %>
+
+    <% if (user) { %>
+  <h1>Welcome back, <%= user.username %> 🌍</h1>
+  <p>Ready to revisit your journeys or plan a new one?</p>
+<% } else { %>
+  <h1>Welcome to Your Travel Journal ✈️</h1>
+  <p>A personal space to capture every trip, big or small.</p>
+<% } %>
+  </body>
 </html>

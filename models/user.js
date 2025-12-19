@@ -21,6 +21,7 @@ const tripSchema = new mongoose.Schema({
     },
     category: {
         type: String,
+        enum: ['work', 'Adventure', 'Business', 'Family','Other'],
         required: true,
     },
     notes: {
@@ -42,7 +43,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
 
-    trips: [tripSchema]
+    trips: [tripSchema] //where embedding happens 
 
 })
 

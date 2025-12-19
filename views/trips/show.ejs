@@ -1,0 +1,28 @@
+<!-- views/applications/show.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= trip.title %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1><%= trip.title %></h1>
+
+<p><strong>Location:</strong> <%= trip.location %></p>
+<p><strong>Start Date:</strong> <%= trip.startDate.toDateString() %></p>
+<p><strong>End Date:</strong> <%= trip.endDate.toDateString() %></p>
+<p><strong>Category:</strong> <%= trip.category %></p>
+<p><strong>Notes:</strong> <%= trip.notes %></p>
+
+<a href="/users/<%= user._id %>/trips/<%= trip._id %>/edit">Edit</a>
+
+<form action="/users/<%= user._id %>/trips/<%= trip._id %>?_method=DELETE" method="POST" style="display:inline;">
+  <button type="submit">Delete</button>
+</form>
+
+<a href="/users/<%= user._id %>/trips">Back to trips</a>
+  </body>
+</html>

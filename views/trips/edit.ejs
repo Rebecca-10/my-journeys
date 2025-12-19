@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Trip</title>
+</head>
+<body>
+  <h1>Edit Trip</h1>
+
+  <form action="/users/<%= user._id %>/trips/<%= trip._id %>?_method=PUT" method="POST">
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" value="<%= trip.title %>" required />
+
+    <label for="location">Location:</label>
+    <input type="text" name="location" id="location" value="<%= trip.location %>" required />
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" name="startDate" id="startDate" value="<%= trip.startDate.toISOString().slice(0,10) %>" required />
+
+    <label for="endDate">End Date:</label>
+    <input type="date" name="endDate" id="endDate" value="<%= trip.endDate.toISOString().slice(0,10) %>" required />
+
+    <label for="category">Category:</label>
+    <select name="category" id="category" required>
+      <% ['Adventure','Relaxation','Business','Family','Other'].forEach(cat => { %>
+        <option value="<%= cat %>" <%= trip.category === cat ? 'selected' : '' %>><%= cat %></option>
+      <% }) %>
+    </select>
+
+    <label for="notes">Notes:</label>
+    <textarea name="notes" id="notes"><%= trip.notes %></textarea>
+
+    <button type="submit">Update Trip</button>
+  </form>
+
+  <a href="/users/<%= user._id %>/trips/<%= trip._id %>">Cancel</a>
+</body>
+</html>
