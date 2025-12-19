@@ -1,5 +1,6 @@
 🌍 My Journeys
 
+![My Journeys App Screenshot](screenshot.png)
 
 
 
